@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activity.CourseActivity">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Tạo mới khoá học"
+            android:textAlignment="center"
+            android:textColor="#1D70B3"
+            android:textSize="24sp" />
+
+        <TextView
+            android:layout_width="96dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Mã khoá: " />
+
+        <EditText
+            android:id="@+id/edtClassId"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:inputType="none"
+            android:hint="Course ID" />
+
+        <TextView
+            android:layout_width="96dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Tên khoá học: " />
+
+        <EditText
+            android:id="@+id/edtClassName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:hint="Course name" />
+
+        <TextView
+            android:layout_width="96dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Mô tả: " />
+
+        <EditText
+            android:id="@+id/edtCourseDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Description"
+            android:layout_weight="2"/>
+
+        <TextView
+            android:layout_width="96dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Số tín chỉ: " />
+
+        <EditText
+            android:id="@+id/edtCredits"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Credits"
+            android:layout_weight="2"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnAdd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:backgroundTint="#4CAF50"
+                android:text="Thêm"
+                android:textColor="#FFFFFF" />
+
+            <Button
+                android:id="@+id/btnUpdate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#FF9800"
+                android:text="Cập nhật"
+                android:layout_weight="1"
+                android:textColor="#FFFFFF" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/holo_blue_dark"
+        android:text="Danh sách khoá học"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="26sp"
+        android:textStyle="bold" />
+
+    <ListView
+        android:id="@+id/lvCourse"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/black"
+        android:divider="@android:color/holo_red_dark"
+        android:dividerHeight="1dp" />
+
+</LinearLayout>

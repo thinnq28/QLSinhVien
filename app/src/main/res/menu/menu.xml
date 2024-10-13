@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/course"
+        android:title="Khoá học"/>
+
+    <item android:id="@+id/registerEnrollment"
+        android:title="Đăng ký kkhoá học"/>
+
+    <item android:id="@+id/enrollment"
+        android:title="Danh sách sinh viên đăng ký khoá học"/>
+
+    <item android:id="@+id/grade"
+        android:title="Nhập điểm"/>
+
+    <item android:id="@+id/logout"
+        android:title="Đăng xuất"/>
+
+</menu>

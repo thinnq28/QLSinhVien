@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activity.RegisterStudentForCourseActivity">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Đăng ký khoá học cho sinh viên"
+        android:textColor="@color/white"
+        android:background="@android:color/holo_orange_light"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        android:padding="8dp"
+        android:textSize="26sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Tên khoá học"
+        android:textColor="@color/white"
+        android:background="@android:color/holo_blue_light"
+        android:textSize="16sp"
+        android:padding="5dp"
+        android:id="@+id/tvCourseName"
+        android:textStyle="bold"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="3"
+        android:layout_margin="5dp"
+        android:orientation="horizontal">
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="Mã sinh viên"
+            android:id="@+id/edtStudentId"
+            />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="Tìm"
+            android:id="@+id/btnSearch"/>
+    </LinearLayout>
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/lvStudent"
+        android:divider="@android:color/holo_orange_light"
+        android:dividerHeight="1dp" />
+</LinearLayout>
