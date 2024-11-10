@@ -84,16 +84,19 @@ public class RegisterStudentForCourseAdapter extends BaseAdapter {
             public void onClick(View view) {
                 // Handle CheckBox click
                 if(chkStudent.isChecked()){
-                    Toast.makeText(context, "Đã đăng ký", Toast.LENGTH_SHORT).show();
                     // Thực hiện các thao tác đăng ký ở đây
                     Enrollment enrollment = new Enrollment();
                     enrollment.setStudentId(student.getId());
                     enrollment.setCourseId(courseId);
+                    enrollment.setGrade("F");
                     enrollmentDAO.insert(enrollment);
+
+                    Toast.makeText(context, "Đã đăng ký", Toast.LENGTH_SHORT).show();
                 }else{
-                    Toast.makeText(context, "Đã hủy đăng ký", Toast.LENGTH_SHORT).show();
                     // Thực hiện các thao tác hủy đăng ký ở đây
                     enrollmentDAO.delete(student.getId(), courseId);
+
+                    Toast.makeText(context, "Đã hủy đăng ký", Toast.LENGTH_SHORT).show();
                 }
             }
         });

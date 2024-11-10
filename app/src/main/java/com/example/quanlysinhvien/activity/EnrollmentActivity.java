@@ -1,8 +1,11 @@
 package com.example.quanlysinhvien.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
 
@@ -32,6 +35,8 @@ public class EnrollmentActivity extends AppCompatActivity {
 
     Spinner spCourse;
     ListView lvStudent;
+    EditText edtCourseId;
+    Button btnTK;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +51,9 @@ public class EnrollmentActivity extends AppCompatActivity {
 
         spCourse = findViewById(R.id.spCourse);
         lvStudent = findViewById(R.id.lvStudent);
+        edtCourseId = findViewById(R.id.edtCourseId);
+        edtCourseId.setEnabled(false);
+        btnTK = findViewById(R.id.btnTK);
 
         StudentAdapter adapter = new StudentAdapter(this, new ArrayList<>());
         lvStudent.setAdapter(adapter);
@@ -70,16 +78,23 @@ public class EnrollmentActivity extends AppCompatActivity {
 
             }
         });
+
+        btnTK.setOnClickListener(v -> {
+            Intent intent = new Intent(EnrollmentActivity.this, ChartActivity.class);
+            intent.putExtra("courseId", edtCourseId.getText().toString());
+            startActivity(intent);
+        });
     }
 
     private void loadStudentByEnrollment() throws ParseException {
         StudentDAO studentDAO = new StudentDAO(this);
         EnrollmentDAO enrollmentDAO = new EnrollmentDAO(this);
         Course course = (Course) spCourse.getSelectedItem();
+        edtCourseId.setText(course.getCourseId() + "");
         List<Enrollment> enrollments = enrollmentDAO.get("SELECT * FROM enrollments WHERE courseId = ?", course.getCourseId() + "");
 
         List<String> studentIds = enrollments.stream().map(Enrollment::getStudentId).collect(Collectors.toList());
-        List<Student> students = studentDAO.get("SELECT * FROM students WHERE id IN (" + String.join(",", studentIds) + ")");
+        List<Student> students = studentDAO.get("SELECT * FROM students WHERE id IN (" + String.join(",", studentIds) + ") and active = 1");
         StudentAdapter studentAdapter = new StudentAdapter(this, students);
         lvStudent.setAdapter(studentAdapter);
     }

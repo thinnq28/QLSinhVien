@@ -40,17 +40,28 @@ public class DbHelper extends SQLiteOpenHelper {
                 "    FOREIGN KEY (StudentId) REFERENCES Students(id) ON DELETE CASCADE," +
                 "    FOREIGN KEY (CourseId) REFERENCES Courses(id) ON DELETE CASCADE)";
 
+        String userSql = "CREATE TABLE users (id INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT NOT NULL, password TEXT NOT NULL, active INTEGER NOT NULL DEFAULT 1)";
+
 
         String dataCourse = "INSERT INTO courses (courseName, courseDescription, credits, active)" +
                 "VALUES ('Lập trình Java cơ bản', 'Java', 3, 1)";
         String dataClass = "INSERT INTO classes (name) VALUES ('CNTT01'), ('CNTT02')";
-        String dataStudent = "INSERT INTO students (id, name, dateOfBirth, gender, phoneNumber, email, classId)" +
+        String dataStudent = "INSERT INTO students (id, name, dateOfBirth, gender, phoneNumber, email, classId, active)" +
                 " VALUES" +
-                "('2023600023','John Doe', '15/01/2000', 'Male', '1234567890', 'john.doe@example.com', 1)," +
-                "('2023600032', 'Jane Smith', '10/05/1995', 'Female', '0987654321', 'jane.smith@example.com', 1)";
-        String dataEnrollment = "INSERT INTO enrollments (studentId, courseId, enrollmentDate) VALUES" +
-                "                ('2023600023', 1, '01/09/2023')," +
-                "                ('2023600032', 1, '02/09/2023')";
+                "('2023600023','John Doe', '15/01/2000', 'Male', '1234567890', 'john.doe@example.com', 1, 1)," +
+                "('2023600024', 'Jane Smith', '10/05/1995', 'Female', '0987654321', 'jane.smith@example.com', 1, 1)," +
+                "('2023600025', 'Harry', '10/05/1995', 'Male', '0987654321', 'jane.smith@example.com', 1, 1)," +
+                "('2023600026', 'Jamas', '10/05/1995', 'Male', '0987654321', 'jane.smith@example.com', 1, 1)," +
+                "('2023600027', 'Barack Obama', '10/05/1995', 'Male', '0987654321', 'jane.smith@example.com', 1, 1)," +
+                "('2023600028', 'Donal Trump', '10/05/1995', 'Male', '0987654321', 'jane.smith@example.com', 1, 1)";
+        String dataEnrollment = "INSERT INTO enrollments (studentId, courseId, enrollmentDate, grade) VALUES" +
+                "                ('2023600023', 1, '01/09/2023', 'F')," +
+                "                ('2023600024', 1, '01/09/2023', 'B')," +
+                "                ('2023600025', 1, '01/09/2023', 'C')," +
+                "                ('2023600026', 1, '01/09/2023', 'D')," +
+                "                ('2023600027', 1, '01/09/2023', 'A')," +
+                "                ('2023600038', 1, '02/09/2023', 'F')";
+        String userSqlData = "INSERT INTO users (username, password, active) VALUES ('admin', 'admin', 1)";
 
 
 
@@ -58,12 +69,14 @@ public class DbHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL(courseSql);
         sqLiteDatabase.execSQL(studentSql);
         sqLiteDatabase.execSQL(enrollmentSql);
+        sqLiteDatabase.execSQL(userSql);
 
 
         sqLiteDatabase.execSQL(dataCourse);
         sqLiteDatabase.execSQL(dataClass);
         sqLiteDatabase.execSQL(dataStudent);
         sqLiteDatabase.execSQL(dataEnrollment);
+        sqLiteDatabase.execSQL(userSqlData);
 
     }
 

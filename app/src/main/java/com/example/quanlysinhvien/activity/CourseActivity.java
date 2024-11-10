@@ -45,37 +45,15 @@ public class CourseActivity extends AppCompatActivity {
         });
 
         this.initWidget();
+
         CourseDAO dao = new CourseDAO(this);
         loadData();
         btnAdd.setOnClickListener(v -> {
-            Course course = new Course();
-            course.setCourseName(edtCourseName.getText().toString());
-            course.setCourseDescription(edtCourseDescription.getText().toString());
-            course.setCredits(Integer.parseInt(edtCredits.getText().toString()));
-            long result = dao.insert(course);
-            if (result == -1) {
-                toast("Thêm thất bại");
-            } else {
-                toast("Thêm thành công");
-                loadData();
-            }
+            add();
         });
 
         btnUpdate.setOnClickListener(v -> {
-            Course course = new Course();
-            course.setCourseId(Integer.parseInt(edtCourseId.getText().toString()));
-            course.setCourseName(edtCourseName.getText().toString());
-            course.setCourseDescription(edtCourseDescription.getText().toString());
-            course.setCredits(Integer.parseInt(edtCredits.getText().toString()));
 
-            long result = dao.update(course);
-            if (result == -1) {
-                toast("Cập nhật thất bại");
-            } else {
-                toast("Cập nhật thành công");
-                loadData();
-                clear();
-            }
         });
 
         lvCourse.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -141,5 +119,80 @@ public class CourseActivity extends AppCompatActivity {
         edtCourseName.setText("");
         edtCourseDescription.setText("");
         edtCredits.setText("");
+    }
+
+    private void add() {
+        CourseDAO dao = new CourseDAO(this);
+        String courseName = edtCourseName.getText().toString();
+        String courseDescription = edtCourseDescription.getText().toString();
+        String credits = edtCredits.getText().toString();
+
+        if(courseName.isEmpty()) {
+            Toast.makeText(this, "Tên khoá học không được để trống", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if(credits.isEmpty()) {
+            Toast.makeText(this, "Số tín chỉ không được để trống", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        Integer createInt = Integer.parseInt(credits);
+
+        if(createInt <= 0) {
+            Toast.makeText(this, "Số tín chỉ phải lớn hơn 0", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        Course course = new Course();
+        course.setCourseName(courseName);
+        course.setCourseDescription(courseDescription);
+        course.setCredits(createInt);
+        long result = dao.insert(course);
+        if (result == -1) {
+            toast("Thêm thất bại");
+        } else {
+            toast("Thêm thành công");
+            loadData();
+        }
+    }
+
+    private void update() {
+        CourseDAO dao = new CourseDAO(this);
+
+        String courseName = edtCourseName.getText().toString();
+        String credits = edtCredits.getText().toString();
+
+        if(courseName.isEmpty()) {
+            Toast.makeText(this, "Tên khoá học không được để trống", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if(credits.isEmpty()) {
+            Toast.makeText(this, "Số tín chỉ không được để trống", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        Integer createInt = Integer.parseInt(credits);
+
+        if(createInt <= 0) {
+            Toast.makeText(this, "Số tín chỉ phải lớn hơn 0", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        Course course = new Course();
+        course.setCourseId(Integer.parseInt(edtCourseId.getText().toString()));
+        course.setCourseName(courseName);
+        course.setCourseDescription(edtCourseDescription.getText().toString());
+        course.setCredits(Integer.parseInt(credits));
+
+        long result = dao.update(course);
+        if (result == -1) {
+            toast("Cập nhật thất bại");
+        } else {
+            toast("Cập nhật thành công");
+            loadData();
+            clear();
+        }
     }
 }

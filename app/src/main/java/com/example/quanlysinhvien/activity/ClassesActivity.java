@@ -53,6 +53,7 @@ public class ClassesActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 edtClassId.setText(classes.get(i).getId() + "");
+                edtClassId.setEnabled(false);
                 edtClassName.setText(classes.get(i).getName());
             }
         });
@@ -81,6 +82,12 @@ public class ClassesActivity extends AppCompatActivity {
         });
 
         btnUpdate.setOnClickListener(v -> {
+
+            if(edtClassName.getText().toString().isEmpty()) {
+                toast("Vui lòng nhập tên lớp");
+                return;
+            }
+
             Classes cls = new Classes();
             cls.setId(Integer.parseInt(edtClassId.getText().toString()));
             cls.setName(edtClassName.getText().toString());

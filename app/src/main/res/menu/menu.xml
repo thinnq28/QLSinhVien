@@ -4,13 +4,13 @@
         android:title="Khoá học"/>
 
     <item android:id="@+id/registerEnrollment"
-        android:title="Đăng ký kkhoá học"/>
-
-    <item android:id="@+id/enrollment"
-        android:title="Danh sách sinh viên đăng ký khoá học"/>
+        android:title="Đăng ký khoá học"/>
 
     <item android:id="@+id/grade"
         android:title="Nhập điểm"/>
+
+    <item android:id="@+id/user"
+        android:title="Quản lý người dùng"/>
 
     <item android:id="@+id/logout"
         android:title="Đăng xuất"/>

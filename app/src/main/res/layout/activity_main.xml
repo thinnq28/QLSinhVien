@@ -42,9 +42,9 @@
         android:layout_margin="8dp"
         android:text="Quản lý sinh viên"/>
     <Button
-        android:id="@+id/btnLogout"
+        android:id="@+id/btnStatistical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        android:text="Đăng xuất"/>
+        android:text="Thống kê"/>
 </LinearLayout>

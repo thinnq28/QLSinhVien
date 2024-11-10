@@ -80,7 +80,7 @@ public class StudentDAO {
     }
 
     public List<Student> findById(String id) {
-        String sql = "SELECT * FROM students WHERE id = ?";
+        String sql = "SELECT * FROM students WHERE id = ? AND active = 1";
         List<Student> students = null;
         try {
             students = this.get(sql, id);

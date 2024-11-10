@@ -67,4 +67,13 @@ public class EnrollmentDAO {
         contentValues.put("grade", enrollment.getGrade());
         return db.update("enrollments", contentValues, "id=?", new String[]{enrollment.getId()+""});
     }
+
+    public List<Enrollment> getByCourseId(int courseId) {
+        String sql = "SELECT * FROM enrollments WHERE courseId = ?";
+        try {
+            return this.get(sql, courseId+"");
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

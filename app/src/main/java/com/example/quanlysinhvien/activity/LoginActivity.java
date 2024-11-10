@@ -17,7 +17,11 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.quanlysinhvien.MainActivity;
 import com.example.quanlysinhvien.R;
+import com.example.quanlysinhvien.model.User;
+import com.example.quanlysinhvien.sqlite.UserDAO;
 import com.google.android.material.snackbar.Snackbar;
+
+import java.util.List;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -56,7 +60,29 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View view) {
         int id = view.getId();
         if (id == R.id.btnLogin) {
-            if (edtUsername.getText().toString().equals("admin") && edtPassword.getText().toString().equals("admin")) {
+            String username = edtUsername.getText().toString();
+            String password = edtPassword.getText().toString();
+            if (username.isEmpty()) {
+                Snackbar snackbar = Snackbar.make(view, "Vui lòng nhập tên đăng nhập!", Snackbar.LENGTH_SHORT);
+                snackbar.show();
+                return;
+            }
+            if (password.isEmpty()) {
+                Snackbar snackbar = Snackbar.make(view, "Vui lòng nhập mật khẩu!", Snackbar.LENGTH_SHORT);
+                snackbar.show();
+                return;
+            }
+            // Kiểm tra tên đăng nhập và mật khẩu
+            UserDAO userDao = new UserDAO(this);
+            List<User> users = userDao.findByUsername(username);
+            if (users.isEmpty()) {
+                Snackbar snackbar = Snackbar.make(view, "Tên đăng nhập không tồn tại!", Snackbar.LENGTH_SHORT);
+                snackbar.show();
+                return;
+            }
+
+            if (password.equals(users.get(0).getPassword())) {
+                saveUsername();
                 if (chkRemember.isChecked()) {
                     saveAutoLogin();
                 } else {
@@ -72,6 +98,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         } else if (id == R.id.btnExit) {
             finish();
         }
+    }
+
+    private void saveUsername() {
+        SharedPreferences preferences = getSharedPreferences("username", MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("username", edtUsername.getText().toString());
+        editor.apply();
     }
 
     private void saveAutoLogin() {
